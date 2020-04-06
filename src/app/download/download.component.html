@@ -1,0 +1,59 @@
+<div class="bg-info pt-2 pb-2 mb-4">
+    <div class="container">
+        <h3 class="text-white">Download.</h3>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+
+            <div class="row justify-content-center mb-4">
+                <div class="col-lg-8">
+                    <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+                        <div class="input-group">
+                            <input type="text" class="form-control" fromControlName="search" placeholder="ค้นหา">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-success">ค้นหา</button>
+                            </div>
+                        </div>                        
+                    </form>
+                </div>
+            </div>
+                
+                
+            
+            
+            
+            <!-- table download list -->
+            <div class=" table-responsive-sm">
+                <table class="table table-striped">
+                    <thead>
+                        <th>Title</th>
+                        <th class="d-none d-md-block">FileType</th>
+                        <th>Date</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of downloadList; index as i">                            
+                            <td><a [attr.href]="'http://localhost:8000/download/'+data.upload_filename">{{data.upload_title}}</a></td>
+                            <td class="d-none d-md-block">{{data.upload_filetype}}</td>
+                            <td>{{data.updateAT | date}}</td>
+                        </tr>                       
+                    </tbody>
+                </table>
+                <nav aria-label="Pagination">
+                    <ul class="pagination justify-content-end">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#">Prev</a>
+                        </li>
+                        <li class="page-item"><a class="page-link">1</a></li>
+                        <li class="page-item"><a class="page-link">2</a></li>
+                        <li class="page-item"><a class="page-link">Next</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <!-- end talbe download list -->
+
+        </div>
+    </div>
+</div>

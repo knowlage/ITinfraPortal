@@ -1,0 +1,63 @@
+<div class="bg-info pt-2 pb-2 mb-4">
+    <div class="container">
+        <h3 class="text-white">FAQs.</h3>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            
+
+            <!-- form search -->
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+                        <div class="input-group">
+                            <input type="text" formControlName="search" class="form-control" placeholder="คำถามที่พบบ่อย ?">
+                            <div class="input-group-append">
+                                <button type="submit" [disabled]="!searchForm.valid" class="btn btn-success">ค้นหา</button>
+                            </div>
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-info" (click)="getFaqs()">
+                                    <i class="fas fa-redo"></i>
+                                </button>
+                            </div>
+                        </div>                       
+                    </form>
+                </div>
+            </div>
+            <div *ngIf="errorSearch" class="alert alert-warning mt-2" role="alert">
+                <span>ไม่พบข้อมูล</span>
+                <button type="button" (click)="onAlertClear()" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- enf of form search -->
+
+            <!-- list of FAQs -->
+            <ul class="list-group mt-3" >
+                <div *ngFor="let data of datas; index as i">     
+                    <div *ngIf="data; else notData">
+                        <li class="list-group-item" data-toggle="collapse" [attr.data-target]="'#question'+i">
+                            <div class="clearfix">
+                                <span class="float-left lead">{{data.faqs_question}}</span>   
+                                <span class="float-right d-none d-md-block">
+                                    <small class="text-muted">{{data.updateAt | date}}</small>
+                                </span> 
+                            </div>                           
+                        </li>
+                        <div [attr.id]="'question'+i" class="collapse">
+                            <p class="px-4" [innerHTML]="data.faqs_answer"></p>                      
+                        </div> 
+                    </div>
+                    
+                </div>                           
+            </ul>
+            <!-- end of list FAQs -->
+
+        </div>
+    </div>
+   
+
+</div>

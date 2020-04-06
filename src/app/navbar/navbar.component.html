@@ -1,0 +1,52 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-secondary sticky-top">
+    <a class="navbar-brand">ITINFRA</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navgation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarMenu">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" routerLink="portal">Home</a>
+            </li> 
+            <li class="nav-item">
+                <a class="nav-link" routerLink="news">News</a>
+            </li>           
+            <li class="nav-item">
+                <a class="nav-link" routerLink="download">Download</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="faqs">FAQs</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="contactUs">ContactUs</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="profileData">ProfileData</a>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav">            
+            <div *ngIf="isLoggedIn | async ; else login">
+               
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      {{isProfileName | async}}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">                      
+                      <a class="dropdown-item" routerLink="/profileData">Profile Computer</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" (click)="onLogout()">Logout</a>
+                    </div>
+                  </li>
+            </div>
+            <ng-template #login>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/login">Login</a>
+                </li>
+            </ng-template>         
+            
+        </ul>
+    </div>
+
+</nav>

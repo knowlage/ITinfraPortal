@@ -1,0 +1,153 @@
+<div class="row">
+    <div class="col">
+        <div class="card shadow-sm">
+            <div class="card-header bg-info text-white">
+              <div class="clearfix">
+                <div class="float-left">
+                  <h5>Computer BackOffice</h5>
+                </div>
+                <div class="float-right">
+                  <a data-toggle="modal" data-target="#computerNew">
+                    <i class="fas fa-2x fa-plus-circle"></i>
+                  </a>                  
+                </div>
+              </div>                
+            </div>
+            <div class="card-body">
+              body computer
+            </div>
+            <div class="card-footer">
+              <button type="button" class="btn btn-outline-success mx-1" data-toggle="modal" data-target="#returnComReq">ขอส่งคืน</button>                
+              <div class="btn-group">
+                <button type="button" class="btn btn-outline-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true">
+                  ขอเปลี่ยนแปลง
+                </button>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" data-toggle="modal" data-target="#chgComputerType">ขอเปลี่ยนแปลงประเภทคอมพิวเตอร์</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" data-toggle="modal" data-target="#chgComputerUser">ขอเปลี่ยนแปลงผู้ใช้งานคอมพิวเตอร์</a>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+</div>
+
+
+<!-- modal -->
+<!-- computer return -->
+<div class="modal fade" id="returnComReq" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="CenterTitle">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="CenterTitle">ขอส่งคืนเครื่องเช่าคอมพิวเตอร์</h5>        
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="bs-stepper">
+            <div class="bs-stepper-header" role="tablist">
+              <!-- your steps here -->
+              <div class="step" data-target="#logins-part">
+                <button type="button" class="step-trigger" role="tab" aria-controls="logins-part" id="logins-part-trigger">
+                  <span class="bs-stepper-circle">1</span>
+                  <span class="bs-stepper-label">Logins</span>
+                </button>
+              </div>
+              <div class="line"></div>
+              <div class="step" data-target="#information-part">
+                <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
+                  <span class="bs-stepper-circle">2</span>
+                  <span class="bs-stepper-label">Various information</span>
+                </button>
+              </div>
+              <div class="line"></div>
+              <div class="step" data-target="#last-part">
+                <button type="button" class="step-trigger" role="tab" aria-controls="last-part" id="last-part-trigger" >
+                    <span class="bs-stepper-circle">3</span>
+                    <span class="bs-stepper-label">last Step</span>
+                </button>
+              </div>
+            </div>
+            <div class="bs-stepper-content">
+              <!-- your steps content here -->
+              <div id="logins-part" class="content" role="tabpanel" aria-labelledby="logins-part-trigger">
+                  <p>dd</p>
+                  <button type="button" class="btn btn-success" (click)="next()">Next</button>
+        
+                </div>
+              <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
+                  ff
+        
+              </div>
+              <div id="last-part" class="content" role="tabpanel" aria-labelledby="last-part-trigger">
+                <app-contact-us></app-contact-us>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end of computer return -->
+
+
+  <!-- chang computer type -->
+  <div class="modal fade" id="chgComputerType" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">ขอเปลี่ยนแปลงประเภทคอมพิวเตอร์</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          body
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end of chang computer type -->
+
+  <!-- chang computer user -->
+  <div class="modal fade" id="chgComputerUser" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">ขอเปลี่ยนแปลงผู้ใช้งานคอมพิวเตอร์</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          body
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- end of chang computer user -->
+
+  <!-- computer new -->
+  <div>
+    <div class="modal fade" id="computerNew" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">ขอใช้งานคอมพิวเตอร์</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            body
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end of computer new -->
+
+  <!-- end of modal -->

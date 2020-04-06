@@ -1,0 +1,59 @@
+<div class="bg-info pt-2 pb-2 mb-4">
+    <div class="container">
+        <h3 class="text-white">News.</h3>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            
+            <!-- search form -->
+            <div class="row justify-content-center mb-4">
+                <div class="col-lg-8">
+                    <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+                        <div class="input-group">
+                            <input type="text" formControlName="search" class="form-control" placeholder="ค้นหา">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-success">ค้นหา</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>            
+            <!-- search form -->
+            
+            <!-- news list -->
+            <div *ngFor="let newsList of newsLists ; index as i">
+                <div class="card mt-2 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">{{newsList.title}}</h5>                    
+                        <div class="card-text">
+                            {{newsList.message}}
+                            <div class="clearfix mt-2">
+                                <p class="float-left text-muted">{{newsList.category}}</p>
+                                <p class="float-right text-muted">{{newsList.date | date}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end of news list -->
+
+            <!-- paginator -->
+            <div class="mt-2">
+                <nav aria-label="Pagination">
+                    <ul class="pagination justify-content-end">
+                         <li class="page-item"><a class="page-link">Pre</a></li>
+                         <li class="page-item"><a class="page-link">1</a></li>
+                         <li class="page-item"><a class="page-link">2</a></li>
+                         <li class="page-item"><a class="page-link">Next</a></li>
+                    </ul>
+                 </nav>
+            </div>
+            <!-- end of paginator -->        
+            
+
+        </div>
+    </div>
+</div>

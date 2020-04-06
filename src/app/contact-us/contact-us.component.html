@@ -1,0 +1,39 @@
+<div class="bg-info pt-2 pb-2 mb-4">
+    <div class="container">
+        <h3 class="text-white">Contact Us.</h3>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row justify-content-center align-items-center mt-3">
+        
+        <div class="col-sm-6 mb-5 order-lg-1">
+            <div class="text-center">
+                <h2>ติดต่อสอบถาม</h2>
+                <p class="text-muted">ติดต่อสอบถามคำถาม และจะได้รับการตอบกลับทาง EMail หรือ โทรกลับ.</p>
+            </div>
+            <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="mt-2">
+                <div class="form-group">
+                    <label for="tel" class="text-muted"><span class="text-danger">*</span>เบอร์โทรที่ติดต่อได้</label>
+                    <input type="text" id="tel" formControlName="tel" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="questionText" class="text-muted"><span class="text-danger">*</span>ข้อความ</label>
+                    <textarea id="questionText" formControlName="questionText" rows="10" cols="30" class="form-control" ></textarea>
+                </div>
+                <button type="submit" [disabled]="!contactForm.valid" class="btn btn-success btn-block ">ส่งคำถาม</button>
+            </form>
+            <hr class="d-sm-none">
+        </div>
+
+        <div class="col-sm-6 text-center order-lg-0 mb-4">
+            <h2>ฝ่ายกลยุทธเทคโนโลยีสารสนเทศ</h2>
+            <p>ส่วนออกแบบโครงสร้างพื้นฐานและเทคโนโลยีสารสนเทศ</p>            
+            <div class="text-muted">อาคารสำนักงานใหญ่ ชั้น 8 มุม B</div>
+            <div class="text-muted">โทร 02-104-4645,4642</div>            
+        </div>
+    </div>
+</div>
+
+
