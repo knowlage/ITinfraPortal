@@ -20,6 +20,7 @@ import { ComputerProfileComponent } from './computer-profile/computer-profile.co
 import { ComputerBackofficeProfileComponent } from './computer-backoffice-profile/computer-backoffice-profile.component';
 import { SoftwareProfileComponent } from './software-profile/software-profile.component';
 import { ComputerProjectProfileComponent } from './computer-project-profile/computer-project-profile.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { ComputerProjectProfileComponent } from './computer-project-profile/comp
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPaginationModule
   ],
   providers: [
     AuthService

@@ -15,4 +15,8 @@ export class DownloadService {
   getDownload(filename){    
     this.http.get('http://localhost:8000/download/'+filename)
   }
+
+  getDownloadSearch(search){
+    return this.http.get('http://localhost:8000/uploads/getUploadSearch/'+search)
+  }
 }

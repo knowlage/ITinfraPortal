@@ -12,12 +12,23 @@
                 <div class="col-lg-8">
                     <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
                         <div class="input-group">
-                            <input type="text" class="form-control" fromControlName="search" placeholder="ค้นหา">
+                            <input type="text" formControlName="search" class="form-control" placeholder="ไฟล์ดาวน์โหลด ?">
                             <div class="input-group-append">
-                                <button type="submit" class="btn btn-success">ค้นหา</button>
+                                <button type="submit" [disabled]="!searchForm.valid" class="btn btn-success">ค้นหา</button>
                             </div>
-                        </div>                        
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-info" (click)="getUpload()">
+                                    <i class="fas fa-redo"></i>
+                                </button>
+                            </div>
+                        </div>                       
                     </form>
+                    <div *ngIf="errorSearch" class="alert alert-warning mt-2" role="alert">
+                        ไม่พบข้อมูล
+                        <button type="button" (click)="onAlertClear()" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                 </div>
             </div>
                 
@@ -34,25 +45,21 @@
                         <th>Date</th>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let data of downloadList; index as i">                            
+                        <tr *ngFor="let data of downloadList | paginate: { itemsPerPage: 5, currentPage: page }">                            
                             <td><a [attr.href]="'http://localhost:8000/download/'+data.upload_filename">{{data.upload_title}}</a></td>
                             <td class="d-none d-md-block">{{data.upload_filetype}}</td>
                             <td>{{data.updateAT | date}}</td>
                         </tr>                       
                     </tbody>
-                </table>
-                <nav aria-label="Pagination">
-                    <ul class="pagination justify-content-end">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#">Prev</a>
-                        </li>
-                        <li class="page-item"><a class="page-link">1</a></li>
-                        <li class="page-item"><a class="page-link">2</a></li>
-                        <li class="page-item"><a class="page-link">Next</a></li>
-                    </ul>
-                </nav>
+                </table>  
+                             
+              
             </div>
+            <div class="d-flex justify-content-end">
+                <pagination-controls (pageChange)="page = $event"></pagination-controls>
+            </div> 
             <!-- end talbe download list -->
+           
 
         </div>
     </div>

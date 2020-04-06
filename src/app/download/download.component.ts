@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { DownloadService } from '../services/download.service';
 
 @Component({
@@ -9,12 +9,14 @@ import { DownloadService } from '../services/download.service';
 })
 export class DownloadComponent implements OnInit {
 
-  downloadList = [
+  @Input('data') downloadList = [
     // {'id':1,'upload_title':'รายชื่อพนักงาน Eary Retire 2016','upload_filename':'retire2016.xlsx','upload_filetype':'pdf','updateAT':'2020-03-23'},
   ]
+  page:number = 1
+  errorSearch:boolean = false
 
   searchForm = this.fb.group({
-    search:['']
+    search:['',Validators.required]
   })
 
   constructor(private fb:FormBuilder, private downloadService:DownloadService) { }
@@ -27,7 +29,7 @@ export class DownloadComponent implements OnInit {
   getUpload(){
     this.downloadService.getUpload().subscribe(rs => {
       this.downloadList = rs['data']
-      console.log(rs['data'])
+      this.onAlertClear()
     })
   }
 
@@ -39,8 +41,24 @@ export class DownloadComponent implements OnInit {
     return this.searchForm.get('search')
   }
 
-  onSubmit(){
-    console.log('submit')
+  onSubmit(search){
+    console.log(this.searchForm.get('search').value)
+    this.downloadService.getDownloadSearch(this.searchForm.get('search').value).subscribe(rs => {
+      if(rs['code'] == 0){
+        this.errorSearch = true
+      }else{
+        this.downloadList = rs['data']
+        this.onAlertClear()
+      }
+    })
+    this.searchForm.reset()
   }
+   onAlertClear(){
+     this.errorSearch = false
+   }
+
+  
+
+ 
 
 }
