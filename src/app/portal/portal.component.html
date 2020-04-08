@@ -24,42 +24,35 @@
         </div>
     </div>
     <div class="row my-2">
-        <div class="col-lg-8">  
+        <div class="col-lg-8 mb-3">  
             <div class="card shadow-sm">
                 <div class="card-header bg-info text-white">
                     News
                 </div>                
-                    <ul class="list-group list-group-flush">                        
-                        <li class="list-group-item">
+                    <ul class="list-group list-group-flush">    
+                       
+                        <li class="list-group-item" *ngFor="let data of newsFeature" >
                             <div class="media">
                                 <div class="media-body">
-                                    <h5 class="mt-3">ทดสอบระบบ</h5>
-                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minus fugit id ab aspernatur. Laboriosam porro repellendus assumenda doloribus ex nisi deleniti delectus minima aliquam veniam, voluptates autem voluptatibus quaerat eligendi!
-                                    <a href="#" class="text-decoration-none"><p class="text-right">more >></p></a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="media">
-                                <div class="media-body">
-                                    <h5 class="mt-3">แจ้งสำรวจความต้องการใช้งานคอมพิวเตอร์</h5>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde porro provident qui facilis, magnam quaerat asperiores quas animi molestias eligendi ipsa, consequatur similique, at soluta fugiat et necessitatibus commodi nemo.
-                                    <a href="#" class="text-decoration-none"><p class="text-right">more >></p></a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="media">
-                                <div class="media-body">
-                                    <h5 class="mt-3">สัญญาที่กำลังหมดสัญญาเช่า</h5>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde porro provident qui facilis, magnam quaerat asperiores quas animi molestias eligendi ipsa, consequatur similique, at soluta fugiat et necessitatibus commodi nemo.
-                                    <p class="text-right">
-                                        <a href="#" class="text-decoration-none">more >></a>
-                                    </p>
+                                    <h5 class="mt-3">{{data.news_title}}</h5>
+                                    <p [innerHTML]="data.news_text | slice:0:255"></p>
+                                    <div class="clearfix">
+                                        <div class="float-right">
+                                            <small>{{data.updateAt | date}}</small>
+                                        </div>
+                                        <div class="float-left">
+                                            <button type="button" class="btn btn-link text-decoration-none" data-toggle="modal" [attr.data-target]="'#ModalNews'+data.id">More</button>
+                                            
+                                        </div>
+                                    </div>
                                     
                                 </div>
-                            </div>
-                        </li>               
+                            </div>                            
+                        </li>                   
+                                          
+                        
+                        
+                        
                         <li class="list-group-item">
                             <a class="text-decoration-none stretched-link " routerLink="/news" >
                                 <p class="text-right">See All</p>
@@ -69,17 +62,17 @@
             </div>       
              
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-4 mb-3">
             <div class="card shadow-sm">
                 <div class="card-header bg-info text-white">
                     Download.
                 </div>
-                <ul class="list-group list-group-flush shadow-sm">                   
-                    <li class="list-group-item"><a class="text-decoration-none stretched-link " routerLink="/download">Morbi leo risus</a></li>
-                    <li class="list-group-item">Porta ac consectetur ac</li>
-                    <li class="list-group-item">Morbi leo risus</li>
-                    <li class="list-group-item">Porta ac consectetur ac</li>
-                    <li class="list-group-item">Morbi leo risus</li>
+                <ul class="list-group list-group-flush shadow-sm" >     
+                    <li class="list-group-item clearfix" *ngFor="let data of uploadFeature; index as i">
+                        <a [attr.href]="'http://localhost:8000/download/'+data.upload_filename" class="float-left">{{data.upload_title}}</a>
+                        <small class="float-right">{{data.updateAT | date}}</small>
+                    </li>             
+                    
                     <li class="list-group-item"><a class="text-decoration-none stretched-link " routerLink="/download"><p class="text-right">See All</p></a></li>
                 </ul>
             </div>           
@@ -125,7 +118,7 @@
 <!-- Modal Search Computer -->
 <div>
     <div class="modal fade" id="ModalSearchComputer" tabindex="-1" role="dialog" aria-hidden="true" >
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Computer Information</h5>
@@ -144,5 +137,26 @@
     </div>
 </div>
 <!-- end of Modal Search Computer -->
+
+<!-- Modal news -->
+<div>
+    <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" *ngFor="let data of newsFeature" [attr.id]="'ModalNews'+data.id" >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{data.news_title}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                     <p [innerHTML]="data.news_text"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- end of Modal news -->
 
 

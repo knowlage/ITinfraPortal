@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
+import { NewsService } from '../services/news.service';
 
 @Component({
   selector: 'app-news',
@@ -7,31 +8,54 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./news.component.scss']
 })
 export class NewsComponent implements OnInit {
-
-  msg = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem tempore ab, nihil beatae, odio dignissimos reiciendis molestiae voluptatibus accusamus fuga, iste doloremque cum atque similique distinctio. Cupiditate aut cumque voluptate!"
+  
   newsLists = [
-    {'title':'Card title','message':this.msg,'category':'ทั่วไป','date':'2020-03-02'},
-    {'title':'Card title','message':this.msg,'category':'ทั่วไป','date':'2020-03-02'},
-    {'title':'Card title','message':this.msg,'category':'ทั่วไป','date':'2020-03-02'},
-    {'title':'Card title','message':this.msg,'category':'ทั่วไป','date':'2020-03-02'},
-    {'title':'Card title','message':this.msg,'category':'ทั่วไป','date':'2020-03-02'},
+    // {'id':'id','news_title':'title','news_text':'news text','updateAt':'date'},    
   ]
+  errorSearch:boolean = false
+  page:number = 1
 
   searchForm = this.fb.group({
-    search:['']
+    search:['',Validators.required]
   })
 
-  constructor(private fb:FormBuilder) { }
+  constructor(private fb:FormBuilder,
+    private newsService:NewsService) { }
 
   ngOnInit() {
     window.scrollTo(0,0);
+    this.getNews()
   }
+
+  getNews(){
+    this.newsService.getNews().subscribe(rs => {
+      this.newsLists = rs['data']
+      this.onAlertClear()
+      this.searchForm.reset()
+      this.page = 1
+    })
+  }
+
+ 
 
   get search() {
     return this.searchForm.get('search')
   }
 
   onSubmit(){
-    console.log(this.searchForm.value)
+      this.newsService.getNewsSearch(this.searchForm.get('search').value).subscribe(rs => {
+      if(rs['code'] == 0){
+        this.errorSearch = true
+      }else{
+        this.newsLists = rs['data']
+        this.onAlertClear()
+        this.page = 1
+      }
+    })
+    this.searchForm.reset()
+  }
+
+  onAlertClear(){
+    this.errorSearch = false
   }
 }

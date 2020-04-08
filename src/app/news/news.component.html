@@ -13,47 +13,53 @@
                 <div class="col-lg-8">
                     <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
                         <div class="input-group">
-                            <input type="text" formControlName="search" class="form-control" placeholder="ค้นหา">
+                            <input type="text" formControlName="search" class="form-control" placeholder="ข่าวสาร ?">
                             <div class="input-group-append">
-                                <button type="submit" class="btn btn-success">ค้นหา</button>
+                                <button type="submit" [disabled]="!searchForm.valid" class="btn btn-success">ค้นหา</button>
+                            </div>
+                            <div class="input-group-append" (click)="getNews()">
+                                <button type="button" class="btn btn-outline-info">
+                                    <svg class="bi bi-arrow-repeat" width="1.2em" height="1.2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M2.854 7.146a.5.5 0 00-.708 0l-2 2a.5.5 0 10.708.708L2.5 8.207l1.646 1.647a.5.5 0 00.708-.708l-2-2zm13-1a.5.5 0 00-.708 0L13.5 7.793l-1.646-1.647a.5.5 0 00-.708.708l2 2a.5.5 0 00.708 0l2-2a.5.5 0 000-.708z" clip-rule="evenodd"/>
+                                        <path fill-rule="evenodd" d="M8 3a4.995 4.995 0 00-4.192 2.273.5.5 0 01-.837-.546A6 6 0 0114 8a.5.5 0 01-1.001 0 5 5 0 00-5-5zM2.5 7.5A.5.5 0 013 8a5 5 0 009.192 2.727.5.5 0 11.837.546A6 6 0 012 8a.5.5 0 01.501-.5z" clip-rule="evenodd"/>
+                                    </svg>
+                                </button>
                             </div>
                         </div>
                     </form>
+                    <div *ngIf="errorSearch" class="alert alert-warning mt-2" role="alert">
+                        <span>ไม่พบข้อมูล</span>
+                        <button type="button" (click)="onAlertClear()" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                </button>
+                    </div>
                 </div>
             </div>            
             <!-- search form -->
             
             <!-- news list -->
-            <div *ngFor="let newsList of newsLists ; index as i">
+            <div *ngFor="let newsList of newsLists | paginate: { itemsPerPage: 10, currentPage : page }">
                 <div class="card mt-2 shadow-sm">
                     <div class="card-body">
-                        <h5 class="card-title">{{newsList.title}}</h5>                    
+                        <h5 class="card-title">{{newsList.news_title}}</h5>                    
                         <div class="card-text">
-                            {{newsList.message}}
-                            <div class="clearfix mt-2">
-                                <p class="float-left text-muted">{{newsList.category}}</p>
-                                <p class="float-right text-muted">{{newsList.date | date}}</p>
+                            <p [innerHTML]="newsList.news_text | slice:0:255"></p>
+                            <div class="clearfix mt-2">   
+                                <button type="button" class="btn  btn-link" data-toggle="collapse" [attr.data-target]="'#news'+newsList.id">More</button>                             
+                                <p class="float-right text-muted">{{newsList.updateAt | date}}</p>
                             </div>
                         </div>
-                    </div>
+                    </div>                    
+                </div>
+                <div [attr.id]="'news'+newsList.id" class="collapse">
+                    <p class="px-3" [innerHTML]="newsList.news_text"></p>
                 </div>
             </div>
-            <!-- end of news list -->
-
-            <!-- paginator -->
-            <div class="mt-2">
-                <nav aria-label="Pagination">
-                    <ul class="pagination justify-content-end">
-                         <li class="page-item"><a class="page-link">Pre</a></li>
-                         <li class="page-item"><a class="page-link">1</a></li>
-                         <li class="page-item"><a class="page-link">2</a></li>
-                         <li class="page-item"><a class="page-link">Next</a></li>
-                    </ul>
-                 </nav>
-            </div>
-            <!-- end of paginator -->        
+            <div class="d-flex justify-content-end mt-2">
+                <pagination-controls (pageChange)="page = $event"></pagination-controls>
+            </div> 
+            <!-- end of news list --> 
             
-
         </div>
     </div>
 </div>
