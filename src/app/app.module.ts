@@ -21,6 +21,7 @@ import { ComputerBackofficeProfileComponent } from './computer-backoffice-profil
 import { SoftwareProfileComponent } from './software-profile/software-profile.component';
 import { ComputerProjectProfileComponent } from './computer-project-profile/computer-project-profile.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NewsDetailComponent } from './news-detail/news-detail.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ComputerProfileComponent,
     ComputerBackofficeProfileComponent,
     SoftwareProfileComponent,
-    ComputerProjectProfileComponent
+    ComputerProjectProfileComponent,
+    NewsDetailComponent
   ],
   imports: [
     BrowserModule,

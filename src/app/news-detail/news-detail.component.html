@@ -1,0 +1,20 @@
+<div class="bg-info pt-2 pb-2 mb-4">
+    <div class="container">
+        <h3 class="text-white">{{news.news_title}}</h3>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <p [innerHTML]="news.news_text"></p>    
+            <hr>
+            <div class="clearfix">
+                <div class="float-left">
+                    {{news.updateAt | date}}
+                </div>
+            </div>        
+        </div>
+    </div>
+    
+</div>

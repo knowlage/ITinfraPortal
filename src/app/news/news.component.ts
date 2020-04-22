@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NewsService } from '../services/news.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-news',
@@ -20,7 +21,8 @@ export class NewsComponent implements OnInit {
   })
 
   constructor(private fb:FormBuilder,
-    private newsService:NewsService) { }
+    private newsService:NewsService,
+    private router:Router) { }
 
   ngOnInit() {
     window.scrollTo(0,0);
@@ -58,4 +60,11 @@ export class NewsComponent implements OnInit {
   onAlertClear(){
     this.errorSearch = false
   }
-}
+
+  newsDetail(news){  
+    this.newsService.newsDetail(news)     
+    this.router.navigate(['/newsDetail'])
+  }
+    
+  }
+  

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -19,4 +20,20 @@ export class NewsService {
   getNewsFeature(){
     return this.http.get('http://localhost:8000/news/getnewsfeature')
   }
+
+  newsDetail(news){ 
+    
+    localStorage.setItem('newsDetail', JSON.stringify(news));
+   
+  }
+
+  newsDetailClear(){
+    localStorage.removeItem('newsDetail')
+  }
+
+  getNewsDetail(){
+    return localStorage.getItem('newsDetail')
+  }
+
+  
 }

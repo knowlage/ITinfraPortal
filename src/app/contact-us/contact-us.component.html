@@ -11,12 +11,18 @@
         <div class="col-sm-6 mb-5 order-lg-1">
             <div class="text-center">
                 <h2>ติดต่อสอบถาม</h2>
-                <p class="text-muted">ติดต่อสอบถามคำถาม และจะได้รับการตอบกลับทาง EMail หรือ โทรกลับ.</p>
+                <p class="text-muted">ติดต่อสอบถามคำถาม และจะได้รับการตอบกลับทาง EMail.</p>
+            </div>
+            <div *ngIf="acceptContact" class="alert alert-success" role="alert">
+                ได้รับข้อมูลแล้ว ท่านจะใด้รับการตอบกลับทางอีเมล์ที่ท่านให้ไว้
+                <button type="button" (click)="onAlertClear()" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="mt-2">
                 <div class="form-group">
-                    <label for="tel" class="text-muted"><span class="text-danger">*</span>เบอร์โทรที่ติดต่อได้</label>
-                    <input type="text" id="tel" formControlName="tel" class="form-control" />
+                    <label for="tel" class="text-muted"><span class="text-danger">*</span>อีเมล์</label>
+                    <input type="email" id="email" formControlName="email" class="form-control" placeholder="email@cattelecom.com"/>
                 </div>
                 <div class="form-group">
                     <label for="questionText" class="text-muted"><span class="text-danger">*</span>ข้อความ</label>

@@ -45,7 +45,8 @@
                         <div class="card-text">
                             <p [innerHTML]="newsList.news_text | slice:0:255"></p>
                             <div class="clearfix mt-2">   
-                                <button type="button" class="btn  btn-link" data-toggle="collapse" [attr.data-target]="'#news'+newsList.id">More</button>                             
+                                <button type="button" class="btn btn-link" (click)="newsDetail(newsList)">More</button>
+                                <!-- <button type="button" class="btn  btn-link" data-toggle="collapse" [attr.data-target]="'#news'+newsList.id">More</button>                              -->
                                 <p class="float-right text-muted">{{newsList.updateAt | date}}</p>
                             </div>
                         </div>
