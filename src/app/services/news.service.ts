@@ -24,7 +24,7 @@ export class NewsService {
   newsDetail(news){ 
     
     localStorage.setItem('newsDetail', JSON.stringify(news));
-   
+    console.log(localStorage.getItem('newsDetail'))
   }
 
   newsDetailClear(){
