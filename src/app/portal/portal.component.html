@@ -69,7 +69,7 @@
                 </div>
                 <ul class="list-group list-group-flush shadow-sm" >     
                     <li class="list-group-item clearfix" *ngFor="let data of uploadFeature; index as i">
-                        <a [attr.href]="'http://localhost:8000/download/'+data.upload_filename" class="float-left">{{data.upload_title}}</a>
+                        <a [attr.href]="'http://localhost:8000/download/file/'+data.upload_filename" class="float-left">{{data.upload_title}}</a>
                         <small class="float-right">{{data.updateAT | date}}</small>
                     </li>             
                     

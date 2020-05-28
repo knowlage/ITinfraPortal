@@ -49,7 +49,7 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let data of downloadList | paginate: { itemsPerPage: 10, currentPage : page }">                            
-                            <td><a [attr.href]="'http://localhost:8000/download/'+data.upload_filename">{{data.upload_title}}</a></td>
+                            <td><a [attr.href]="'http://localhost:8000/download/file/'+data.upload_filename">{{data.upload_title}}</a></td>
                             <td class="d-none d-md-block">{{data.upload_filetype}}</td>
                             <td>{{data.updateAT | date}}</td>
                         </tr>                       
